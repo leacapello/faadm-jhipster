@@ -1,0 +1,43 @@
+enum IdentificacionTipo {
+	DNI, CUIL, CUIT
+}
+
+entity Cliente {
+	descripcion String required unique minlength(3) minlength(40),
+    identificacion String required unique minlength(5),
+    identificacionTipo IdentificacionTipo required
+}
+
+entity Direccion {
+	direccion String required,
+    ciudad String required,
+    pais String required
+}
+
+entity Factura {
+	identificacion String required unique,
+    fecha ZonedDateTime required,
+    monto Float required,
+    fechaVencimiento ZonedDateTime,
+    facturadRealizada Boolean,
+    facturaEnviada Boolean,
+    facturaCobrada Boolean
+}
+
+relationship OneToOne {
+	Cliente{direccion} to Direccion
+}
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+	Factura{cliente} to Cliente
+}
+
+// Set pagination options
+paginate Cliente, Factura with infinite-scroll
+
+// Set service options to all except few
+service all with serviceImpl
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

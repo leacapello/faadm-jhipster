@@ -1,0 +1,23 @@
+import { IDireccion } from 'app/shared/model/direccion.model';
+import { IFactura } from 'app/shared/model/factura.model';
+import { IdentificacionTipo } from 'app/shared/model/enumerations/identificacion-tipo.model';
+
+export interface ICliente {
+  id?: number;
+  descripcion?: string;
+  identificacion?: string;
+  identificacionTipo?: IdentificacionTipo;
+  direccion?: IDireccion;
+  factura?: IFactura;
+}
+
+export class Cliente implements ICliente {
+  constructor(
+    public id?: number,
+    public descripcion?: string,
+    public identificacion?: string,
+    public identificacionTipo?: IdentificacionTipo,
+    public direccion?: IDireccion,
+    public factura?: IFactura
+  ) {}
+}

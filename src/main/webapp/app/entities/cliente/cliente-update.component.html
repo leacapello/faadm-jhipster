@@ -1,0 +1,89 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-cliente-heading">Create or edit a Cliente</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_descripcion">Descripcion</label>
+                    <input type="text" class="form-control" name="descripcion" id="field_descripcion"
+                           formControlName="descripcion"/>
+                    <div *ngIf="editForm.get('descripcion')!.invalid && (editForm.get('descripcion')!.dirty || editForm.get('descripcion')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('descripcion')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('descripcion')?.errors?.minlength">
+                        This field is required to be at least 40 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_identificacion">Identificacion</label>
+                    <input type="text" class="form-control" name="identificacion" id="field_identificacion"
+                           formControlName="identificacion"/>
+                    <div *ngIf="editForm.get('identificacion')!.invalid && (editForm.get('identificacion')!.dirty || editForm.get('identificacion')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('identificacion')?.errors?.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('identificacion')?.errors?.minlength">
+                        This field is required to be at least 5 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_identificacionTipo">Identificacion Tipo</label>
+                    <select class="form-control" name="identificacionTipo" formControlName="identificacionTipo" id="field_identificacionTipo">
+                        <option value="DNI">DNI</option>
+                        <option value="CUIL">CUIL</option>
+                        <option value="CUIT">CUIT</option>
+                    </select>
+                    <div *ngIf="editForm.get('identificacionTipo')!.invalid && (editForm.get('identificacionTipo')!.dirty || editForm.get('identificacionTipo')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('identificacionTipo')?.errors?.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_direccion">Direccion</label>
+                    <select class="form-control" id="field_direccion" name="direccion" formControlName="direccion">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="direccionOption.id === editForm.get('direccion')!.value?.id ? editForm.get('direccion')!.value : direccionOption" *ngFor="let direccionOption of direccions; trackBy: trackById">{{ direccionOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_factura">Factura</label>
+                    <select class="form-control" id="field_factura" name="factura" formControlName="factura">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="facturaOption.id === editForm.get('factura')!.value?.id ? editForm.get('factura')!.value : facturaOption" *ngFor="let facturaOption of facturas; trackBy: trackById">{{ facturaOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
