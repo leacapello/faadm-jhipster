@@ -44,6 +44,9 @@ public class ClienteResourceIT {
     private static final IdentificacionTipo DEFAULT_IDENTIFICACION_TIPO = IdentificacionTipo.DNI;
     private static final IdentificacionTipo UPDATED_IDENTIFICACION_TIPO = IdentificacionTipo.CUIL;
 
+    private static final String DEFAULT_DIRECCION = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+    private static final String UPDATED_DIRECCION = "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB";
+
     @Autowired
     private ClienteRepository clienteRepository;
 
@@ -91,7 +94,8 @@ public class ClienteResourceIT {
         Cliente cliente = new Cliente()
             .descripcion(DEFAULT_DESCRIPCION)
             .identificacion(DEFAULT_IDENTIFICACION)
-            .identificacionTipo(DEFAULT_IDENTIFICACION_TIPO);
+            .identificacionTipo(DEFAULT_IDENTIFICACION_TIPO)
+            .direccion(DEFAULT_DIRECCION);
         return cliente;
     }
     /**
@@ -104,7 +108,8 @@ public class ClienteResourceIT {
         Cliente cliente = new Cliente()
             .descripcion(UPDATED_DESCRIPCION)
             .identificacion(UPDATED_IDENTIFICACION)
-            .identificacionTipo(UPDATED_IDENTIFICACION_TIPO);
+            .identificacionTipo(UPDATED_IDENTIFICACION_TIPO)
+            .direccion(UPDATED_DIRECCION);
         return cliente;
     }
 
@@ -131,6 +136,7 @@ public class ClienteResourceIT {
         assertThat(testCliente.getDescripcion()).isEqualTo(DEFAULT_DESCRIPCION);
         assertThat(testCliente.getIdentificacion()).isEqualTo(DEFAULT_IDENTIFICACION);
         assertThat(testCliente.getIdentificacionTipo()).isEqualTo(DEFAULT_IDENTIFICACION_TIPO);
+        assertThat(testCliente.getDireccion()).isEqualTo(DEFAULT_DIRECCION);
     }
 
     @Test
@@ -220,7 +226,8 @@ public class ClienteResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(cliente.getId().intValue())))
             .andExpect(jsonPath("$.[*].descripcion").value(hasItem(DEFAULT_DESCRIPCION)))
             .andExpect(jsonPath("$.[*].identificacion").value(hasItem(DEFAULT_IDENTIFICACION)))
-            .andExpect(jsonPath("$.[*].identificacionTipo").value(hasItem(DEFAULT_IDENTIFICACION_TIPO.toString())));
+            .andExpect(jsonPath("$.[*].identificacionTipo").value(hasItem(DEFAULT_IDENTIFICACION_TIPO.toString())))
+            .andExpect(jsonPath("$.[*].direccion").value(hasItem(DEFAULT_DIRECCION)));
     }
     
     @Test
@@ -236,7 +243,8 @@ public class ClienteResourceIT {
             .andExpect(jsonPath("$.id").value(cliente.getId().intValue()))
             .andExpect(jsonPath("$.descripcion").value(DEFAULT_DESCRIPCION))
             .andExpect(jsonPath("$.identificacion").value(DEFAULT_IDENTIFICACION))
-            .andExpect(jsonPath("$.identificacionTipo").value(DEFAULT_IDENTIFICACION_TIPO.toString()));
+            .andExpect(jsonPath("$.identificacionTipo").value(DEFAULT_IDENTIFICACION_TIPO.toString()))
+            .andExpect(jsonPath("$.direccion").value(DEFAULT_DIRECCION));
     }
 
     @Test
@@ -262,7 +270,8 @@ public class ClienteResourceIT {
         updatedCliente
             .descripcion(UPDATED_DESCRIPCION)
             .identificacion(UPDATED_IDENTIFICACION)
-            .identificacionTipo(UPDATED_IDENTIFICACION_TIPO);
+            .identificacionTipo(UPDATED_IDENTIFICACION_TIPO)
+            .direccion(UPDATED_DIRECCION);
 
         restClienteMockMvc.perform(put("/api/clientes")
             .contentType(TestUtil.APPLICATION_JSON)
@@ -276,6 +285,7 @@ public class ClienteResourceIT {
         assertThat(testCliente.getDescripcion()).isEqualTo(UPDATED_DESCRIPCION);
         assertThat(testCliente.getIdentificacion()).isEqualTo(UPDATED_IDENTIFICACION);
         assertThat(testCliente.getIdentificacionTipo()).isEqualTo(UPDATED_IDENTIFICACION_TIPO);
+        assertThat(testCliente.getDireccion()).isEqualTo(UPDATED_DIRECCION);
     }
 
     @Test

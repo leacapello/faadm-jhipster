@@ -40,13 +40,13 @@ public class Cliente implements Serializable {
     @Column(name = "identificacion_tipo", nullable = false)
     private IdentificacionTipo identificacionTipo;
 
-    @OneToOne
-    @JoinColumn(unique = true)
-    private Direccion direccion;
+    @Size(min = 100)
+    @Column(name = "direccion")
+    private String direccion;
 
     @ManyToOne
     @JsonIgnoreProperties("clientes")
-    private Factura factura;
+    private Factura facturas;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -96,30 +96,30 @@ public class Cliente implements Serializable {
         this.identificacionTipo = identificacionTipo;
     }
 
-    public Direccion getDireccion() {
+    public String getDireccion() {
         return direccion;
     }
 
-    public Cliente direccion(Direccion direccion) {
+    public Cliente direccion(String direccion) {
         this.direccion = direccion;
         return this;
     }
 
-    public void setDireccion(Direccion direccion) {
+    public void setDireccion(String direccion) {
         this.direccion = direccion;
     }
 
-    public Factura getFactura() {
-        return factura;
+    public Factura getFacturas() {
+        return facturas;
     }
 
-    public Cliente factura(Factura factura) {
-        this.factura = factura;
+    public Cliente facturas(Factura factura) {
+        this.facturas = factura;
         return this;
     }
 
-    public void setFactura(Factura factura) {
-        this.factura = factura;
+    public void setFacturas(Factura factura) {
+        this.facturas = factura;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -146,6 +146,7 @@ public class Cliente implements Serializable {
             ", descripcion='" + getDescripcion() + "'" +
             ", identificacion='" + getIdentificacion() + "'" +
             ", identificacionTipo='" + getIdentificacionTipo() + "'" +
+            ", direccion='" + getDireccion() + "'" +
             "}";
     }
 }

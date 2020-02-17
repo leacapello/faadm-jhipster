@@ -1,4 +1,3 @@
-import { IDireccion } from 'app/shared/model/direccion.model';
 import { IFactura } from 'app/shared/model/factura.model';
 import { IdentificacionTipo } from 'app/shared/model/enumerations/identificacion-tipo.model';
 
@@ -7,8 +6,8 @@ export interface ICliente {
   descripcion?: string;
   identificacion?: string;
   identificacionTipo?: IdentificacionTipo;
-  direccion?: IDireccion;
-  factura?: IFactura;
+  direccion?: string;
+  facturas?: IFactura;
 }
 
 export class Cliente implements ICliente {
@@ -17,7 +16,7 @@ export class Cliente implements ICliente {
     public descripcion?: string,
     public identificacion?: string,
     public identificacionTipo?: IdentificacionTipo,
-    public direccion?: IDireccion,
-    public factura?: IFactura
+    public direccion?: string,
+    public facturas?: IFactura
   ) {}
 }

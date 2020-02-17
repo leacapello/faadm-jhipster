@@ -1,5 +1,4 @@
 import { Moment } from 'moment';
-import { ICliente } from 'app/shared/model/cliente.model';
 
 export interface IFactura {
   id?: number;
@@ -10,7 +9,6 @@ export interface IFactura {
   facturadRealizada?: boolean;
   facturaEnviada?: boolean;
   facturaCobrada?: boolean;
-  clientes?: ICliente[];
 }
 
 export class Factura implements IFactura {
@@ -22,8 +20,7 @@ export class Factura implements IFactura {
     public fechaVencimiento?: Moment,
     public facturadRealizada?: boolean,
     public facturaEnviada?: boolean,
-    public facturaCobrada?: boolean,
-    public clientes?: ICliente[]
+    public facturaCobrada?: boolean
   ) {
     this.facturadRealizada = this.facturadRealizada || false;
     this.facturaEnviada = this.facturaEnviada || false;

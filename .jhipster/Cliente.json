@@ -28,22 +28,22 @@
             "fieldValidateRules": [
                 "required"
             ]
+        },
+        {
+            "fieldName": "direccion",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "minlength"
+            ],
+            "fieldValidateRulesMinlength": "100"
         }
     ],
     "relationships": [
         {
-            "relationshipType": "one-to-one",
-            "otherEntityName": "direccion",
-            "otherEntityRelationshipName": "cliente",
-            "relationshipName": "direccion",
-            "otherEntityField": "id",
-            "ownerSide": true
-        },
-        {
             "relationshipType": "many-to-one",
             "otherEntityName": "factura",
             "otherEntityRelationshipName": "cliente",
-            "relationshipName": "factura",
+            "relationshipName": "facturas",
             "otherEntityField": "id"
         }
     ],

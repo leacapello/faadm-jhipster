@@ -21,7 +21,7 @@ describe('Service Tests', () => {
       service = injector.get(ClienteService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new Cliente(0, 'AAAAAAA', 'AAAAAAA', IdentificacionTipo.DNI);
+      elemDefault = new Cliente(0, 'AAAAAAA', 'AAAAAAA', IdentificacionTipo.DNI, 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -57,7 +57,8 @@ describe('Service Tests', () => {
           {
             descripcion: 'BBBBBB',
             identificacion: 'BBBBBB',
-            identificacionTipo: 'BBBBBB'
+            identificacionTipo: 'BBBBBB',
+            direccion: 'BBBBBB'
           },
           elemDefault
         );
@@ -76,7 +77,8 @@ describe('Service Tests', () => {
           {
             descripcion: 'BBBBBB',
             identificacion: 'BBBBBB',
-            identificacionTipo: 'BBBBBB'
+            identificacionTipo: 'BBBBBB',
+            direccion: 'BBBBBB'
           },
           elemDefault
         );

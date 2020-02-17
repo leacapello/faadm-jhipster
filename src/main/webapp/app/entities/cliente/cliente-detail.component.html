@@ -22,14 +22,12 @@
                 </dd>
                 <dt><span>Direccion</span></dt>
                 <dd>
-                    <div *ngIf="cliente.direccion">
-                        <a [routerLink]="['/direccion', cliente.direccion?.id, 'view']">{{ cliente.direccion?.id }}</a>
-                    </div>
+                    <span>{{ cliente.direccion }}</span>
                 </dd>
-                <dt><span>Factura</span></dt>
+                <dt><span>Facturas</span></dt>
                 <dd>
-                    <div *ngIf="cliente.factura">
-                        <a [routerLink]="['/factura', cliente.factura?.id, 'view']">{{ cliente.factura?.id }}</a>
+                    <div *ngIf="cliente.facturas">
+                        <a [routerLink]="['/factura', cliente.facturas?.id, 'view']">{{ cliente.facturas?.id }}</a>
                     </div>
                 </dd>
             </dl>
