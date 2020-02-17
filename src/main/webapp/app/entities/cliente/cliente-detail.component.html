@@ -1,0 +1,50 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="cliente">
+            <h2><span>Cliente</span> {{ cliente.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Descripcion</span></dt>
+                <dd>
+                    <span>{{ cliente.descripcion }}</span>
+                </dd>
+                <dt><span>Identificacion</span></dt>
+                <dd>
+                    <span>{{ cliente.identificacion }}</span>
+                </dd>
+                <dt><span>Identificacion Tipo</span></dt>
+                <dd>
+                    <span>{{ cliente.identificacionTipo }}</span>
+                </dd>
+                <dt><span>Direccion</span></dt>
+                <dd>
+                    <div *ngIf="cliente.direccion">
+                        <a [routerLink]="['/direccion', cliente.direccion?.id, 'view']">{{ cliente.direccion?.id }}</a>
+                    </div>
+                </dd>
+                <dt><span>Factura</span></dt>
+                <dd>
+                    <div *ngIf="cliente.factura">
+                        <a [routerLink]="['/factura', cliente.factura?.id, 'view']">{{ cliente.factura?.id }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/cliente', cliente.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

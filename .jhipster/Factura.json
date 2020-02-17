@@ -1,0 +1,61 @@
+{
+    "name": "Factura",
+    "fields": [
+        {
+            "fieldName": "identificacion",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "unique"
+            ]
+        },
+        {
+            "fieldName": "fecha",
+            "fieldType": "ZonedDateTime",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "monto",
+            "fieldType": "Float",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "fechaVencimiento",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "facturadRealizada",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "facturaEnviada",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "facturaCobrada",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "cliente",
+            "otherEntityRelationshipName": "factura",
+            "relationshipName": "cliente"
+        }
+    ],
+    "changelogDate": "20200217181400",
+    "entityTableName": "factura",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

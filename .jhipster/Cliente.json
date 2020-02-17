@@ -1,0 +1,60 @@
+{
+    "name": "Cliente",
+    "fields": [
+        {
+            "fieldName": "descripcion",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "unique",
+                "minlength"
+            ],
+            "fieldValidateRulesMinlength": "40"
+        },
+        {
+            "fieldName": "identificacion",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "unique",
+                "minlength"
+            ],
+            "fieldValidateRulesMinlength": "5"
+        },
+        {
+            "fieldName": "identificacionTipo",
+            "fieldType": "IdentificacionTipo",
+            "fieldValues": "DNI,CUIL,CUIT",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "direccion",
+            "otherEntityRelationshipName": "cliente",
+            "relationshipName": "direccion",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "factura",
+            "otherEntityRelationshipName": "cliente",
+            "relationshipName": "factura",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200217181200",
+    "entityTableName": "cliente",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -42,6 +42,10 @@ public class CacheConfiguration {
             createCache(cm, com.verynex.faadm.domain.User.class.getName());
             createCache(cm, com.verynex.faadm.domain.Authority.class.getName());
             createCache(cm, com.verynex.faadm.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.verynex.faadm.domain.Cliente.class.getName());
+            createCache(cm, com.verynex.faadm.domain.Direccion.class.getName());
+            createCache(cm, com.verynex.faadm.domain.Factura.class.getName());
+            createCache(cm, com.verynex.faadm.domain.Factura.class.getName() + ".clientes");
             // jhipster-needle-ehcache-add-entry
         };
     }

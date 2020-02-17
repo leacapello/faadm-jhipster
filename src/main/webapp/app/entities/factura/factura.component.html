@@ -1,0 +1,73 @@
+<div>
+    <h2 id="page-heading">
+        <span>Facturas</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-factura" [routerLink]="['/factura/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span>
+            Create a new Factura
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="facturas?.length === 0">
+        <span>No facturas found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="facturas?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="identificacion"><span>Identificacion</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="fecha"><span>Fecha</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="monto"><span>Monto</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="fechaVencimiento"><span>Fecha Vencimiento</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="facturadRealizada"><span>Facturad Realizada</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="facturaEnviada"><span>Factura Enviada</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="facturaCobrada"><span>Factura Cobrada</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+                <tr *ngFor="let factura of facturas ;trackBy: trackId">
+                    <td><a [routerLink]="['/factura', factura.id, 'view']">{{ factura.id }}</a></td>
+                    <td>{{ factura.identificacion }}</td>
+                    <td>{{ factura.fecha | date:'medium' }}</td>
+                    <td>{{ factura.monto }}</td>
+                    <td>{{ factura.fechaVencimiento | date:'medium' }}</td>
+                    <td>{{ factura.facturadRealizada }}</td>
+                    <td>{{ factura.facturaEnviada }}</td>
+                    <td>{{ factura.facturaCobrada }}</td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/factura', factura.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/factura', factura.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(factura)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
