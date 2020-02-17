@@ -4,16 +4,11 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 import { ICliente, Cliente } from 'app/shared/model/cliente.model';
 import { ClienteService } from './cliente.service';
-import { IDireccion } from 'app/shared/model/direccion.model';
-import { DireccionService } from 'app/entities/direccion/direccion.service';
 import { IFactura } from 'app/shared/model/factura.model';
 import { FacturaService } from 'app/entities/factura/factura.service';
-
-type SelectableEntity = IDireccion | IFactura;
 
 @Component({
   selector: 'jhi-cliente-update',
@@ -21,7 +16,6 @@ type SelectableEntity = IDireccion | IFactura;
 })
 export class ClienteUpdateComponent implements OnInit {
   isSaving = false;
-  direccions: IDireccion[] = [];
   facturas: IFactura[] = [];
 
   editForm = this.fb.group({
@@ -29,13 +23,12 @@ export class ClienteUpdateComponent implements OnInit {
     descripcion: [null, [Validators.required, Validators.minLength(40)]],
     identificacion: [null, [Validators.required, Validators.minLength(5)]],
     identificacionTipo: [null, [Validators.required]],
-    direccion: [],
-    factura: []
+    direccion: [null, [Validators.minLength(100)]],
+    facturas: []
   });
 
   constructor(
     protected clienteService: ClienteService,
-    protected direccionService: DireccionService,
     protected facturaService: FacturaService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
@@ -44,28 +37,6 @@ export class ClienteUpdateComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ cliente }) => {
       this.updateForm(cliente);
-
-      this.direccionService
-        .query({ filter: 'cliente-is-null' })
-        .pipe(
-          map((res: HttpResponse<IDireccion[]>) => {
-            return res.body || [];
-          })
-        )
-        .subscribe((resBody: IDireccion[]) => {
-          if (!cliente.direccion || !cliente.direccion.id) {
-            this.direccions = resBody;
-          } else {
-            this.direccionService
-              .find(cliente.direccion.id)
-              .pipe(
-                map((subRes: HttpResponse<IDireccion>) => {
-                  return subRes.body ? [subRes.body].concat(resBody) : resBody;
-                })
-              )
-              .subscribe((concatRes: IDireccion[]) => (this.direccions = concatRes));
-          }
-        });
 
       this.facturaService.query().subscribe((res: HttpResponse<IFactura[]>) => (this.facturas = res.body || []));
     });
@@ -78,7 +49,7 @@ export class ClienteUpdateComponent implements OnInit {
       identificacion: cliente.identificacion,
       identificacionTipo: cliente.identificacionTipo,
       direccion: cliente.direccion,
-      factura: cliente.factura
+      facturas: cliente.facturas
     });
   }
 
@@ -104,7 +75,7 @@ export class ClienteUpdateComponent implements OnInit {
       identificacion: this.editForm.get(['identificacion'])!.value,
       identificacionTipo: this.editForm.get(['identificacionTipo'])!.value,
       direccion: this.editForm.get(['direccion'])!.value,
-      factura: this.editForm.get(['factura'])!.value
+      facturas: this.editForm.get(['facturas'])!.value
     };
   }
 
@@ -124,7 +95,7 @@ export class ClienteUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  trackById(index: number, item: SelectableEntity): any {
+  trackById(index: number, item: IFactura): any {
     return item.id;
   }
 }

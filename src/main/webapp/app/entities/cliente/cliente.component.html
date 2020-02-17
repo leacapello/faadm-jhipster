@@ -26,8 +26,8 @@
                     <th scope="col"  jhiSortBy="descripcion"><span>Descripcion</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="identificacion"><span>Identificacion</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="identificacionTipo"><span>Identificacion Tipo</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="direccion.id"><span>Direccion</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="factura.id"><span>Factura</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="direccion"><span>Direccion</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="facturas.id"><span>Facturas</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -37,14 +37,10 @@
                     <td>{{ cliente.descripcion }}</td>
                     <td>{{ cliente.identificacion }}</td>
                     <td>{{ cliente.identificacionTipo }}</td>
+                    <td>{{ cliente.direccion }}</td>
                     <td>
-                        <div *ngIf="cliente.direccion">
-                            <a [routerLink]="['/direccion', cliente.direccion?.id, 'view']" >{{ cliente.direccion?.id }}</a>
-                        </div>
-                    </td>
-                    <td>
-                        <div *ngIf="cliente.factura">
-                            <a [routerLink]="['/factura', cliente.factura?.id, 'view']" >{{ cliente.factura?.id }}</a>
+                        <div *ngIf="cliente.facturas">
+                            <a [routerLink]="['/factura', cliente.facturas?.id, 'view']" >{{ cliente.facturas?.id }}</a>
                         </div>
                     </td>
                     <td class="text-right">

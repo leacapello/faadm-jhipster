@@ -8,15 +8,9 @@
     -->
     <changeSet id="20200217181200-2" author="jhipster">
         
-        <addForeignKeyConstraint baseColumnNames="direccion_id"
+        <addForeignKeyConstraint baseColumnNames="facturas_id"
                                  baseTableName="cliente"
-                                 constraintName="fk_cliente_direccion_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="direccion"/>
-
-        <addForeignKeyConstraint baseColumnNames="factura_id"
-                                 baseTableName="cliente"
-                                 constraintName="fk_cliente_factura_id"
+                                 constraintName="fk_cliente_facturas_id"
                                  referencedColumnNames="id"
                                  referencedTableName="factura"/>
 

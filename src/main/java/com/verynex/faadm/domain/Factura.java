@@ -8,8 +8,6 @@ import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * A Factura.
@@ -48,10 +46,6 @@ public class Factura implements Serializable {
 
     @Column(name = "factura_cobrada")
     private Boolean facturaCobrada;
-
-    @OneToMany(mappedBy = "factura")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Cliente> clientes = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -151,31 +145,6 @@ public class Factura implements Serializable {
 
     public void setFacturaCobrada(Boolean facturaCobrada) {
         this.facturaCobrada = facturaCobrada;
-    }
-
-    public Set<Cliente> getClientes() {
-        return clientes;
-    }
-
-    public Factura clientes(Set<Cliente> clientes) {
-        this.clientes = clientes;
-        return this;
-    }
-
-    public Factura addCliente(Cliente cliente) {
-        this.clientes.add(cliente);
-        cliente.setFactura(this);
-        return this;
-    }
-
-    public Factura removeCliente(Cliente cliente) {
-        this.clientes.remove(cliente);
-        cliente.setFactura(null);
-        return this;
-    }
-
-    public void setClientes(Set<Cliente> clientes) {
-        this.clientes = clientes;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

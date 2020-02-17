@@ -40,14 +40,7 @@
             "fieldType": "Boolean"
         }
     ],
-    "relationships": [
-        {
-            "relationshipType": "one-to-many",
-            "otherEntityName": "cliente",
-            "otherEntityRelationshipName": "factura",
-            "relationshipName": "cliente"
-        }
-    ],
+    "relationships": [],
     "changelogDate": "20200217181400",
     "entityTableName": "factura",
     "dto": "no",
